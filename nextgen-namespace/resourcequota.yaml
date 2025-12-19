@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: nextgen-quota
+  namespace: nextgen
+spec:
+  hard:
+    pods: "10"
+    limits.cpu: "2"
+    limits.memory: "12Gi"
+
+
