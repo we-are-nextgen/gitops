@@ -1,97 +1,74 @@
-kind: DeploymentConfig
-apiVersion: apps.openshift.io/v1
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  annotations:
-    template.alpha.openshift.io/wait-for-ready: 'true'
-    #argocd.argoproj.io/sync-wave: "1"
   name: postgresql
   labels:
-    template: postgresql-ephemeral-template
+    app: postgresql
 spec:
-  strategy:
-    type: Recreate
-    recreateParams:
-      timeoutSeconds: 600
-    resources: {}
-    activeDeadlineSeconds: 21600
-  triggers:
-    - type: ConfigChange
   replicas: 1
   revisionHistoryLimit: 10
-  test: false
+  strategy:
+    type: Recreate
   selector:
-    name: postgresql
+    matchLabels:
+      app: postgresql
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        name: postgresql
+        app: postgresql
     spec:
       volumes:
         - name: postgresql-data
           emptyDir: {}
       containers:
-        - resources:
+        - name: postgresql
+          image: postgres:15
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          resources:
             limits:
-              cpu: '1'
+              cpu: "1"
               memory: 2Gi
             requests:
               cpu: 100m
               memory: 256Mi
-          readinessProbe:
-            exec:
-              command:
-                - /usr/libexec/check-container
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
-            periodSeconds: 10
-            successThreshold: 1
-            failureThreshold: 3
-          terminationMessagePath: /dev/termination-log
-          name: postgresql
-          livenessProbe:
-            exec:
-              command:
-                - /usr/libexec/check-container
-                - '--live'
-            initialDelaySeconds: 120
-            timeoutSeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            failureThreshold: 3
           env:
-            - name: POSTGRESQL_USER
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: postgresql
                   key: database-user
-            - name: POSTGRESQL_PASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgresql
                   key: database-password
-            - name: POSTGRESQL_DATABASE
+            - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
                   name: postgresql
                   key: database-name
-          securityContext:
-            capabilities: {}
-            privileged: false
-          ports:
-            - containerPort: 5432
-              protocol: TCP
-          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: postgresql-data
-              mountPath: /var/lib/pgsql/data
-          terminationMessagePolicy: File
-          image: 'image-registry.openshift-image-registry.svc:5000/openshift/postgresql:latest'
-      restartPolicy: Always
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U "$POSTGRES_USER"
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U "$POSTGRES_USER"
+            initialDelaySeconds: 30
+            periodSeconds: 10
       terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
-      schedulerName: default-scheduler
 ---
 kind: Secret
 apiVersion: v1
