@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
-  namespace: smart-gen
+  namespace: nextgen-gitops
   labels:
     app: postgresql
 spec:
@@ -75,6 +75,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: postgresql
+  namespace: nextgen-gitops
 data:
   database-name: bmV4dGdlbg== #nextgen
   database-password: QzBtcGxleFBAc3N3MHJk #C0mplexP@ssw0rd
@@ -85,6 +86,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: postgresqldb
+  namespace: nextgen-gitops
 spec:
   ipFamilies:
     - IPv4
