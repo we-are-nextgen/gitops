@@ -98,4 +98,4 @@ spec:
   ipFamilyPolicy: SingleStack
   sessionAffinity: None
   selector:
-    name: postgresql
+    app: postgresql
