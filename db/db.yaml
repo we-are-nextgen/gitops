@@ -77,7 +77,7 @@ metadata:
 data:
   database-name: bmV4dGdlbg== #nextgen
   database-password: QzBtcGxleFBAc3N3MHJk #C0mplexP@ssw0rd
-  database-user: cG9zdGdyZXNAcG9zdGdyZXNxbHNlcnZlci1uZXh0Z2Vu #postgres@postgresqlserver-nextgen
+  database-user: bmV4dGdlbg== #nextgen
 type: Opaque
 ---
 kind: Service
