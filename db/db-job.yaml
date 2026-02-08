@@ -40,10 +40,6 @@ spec:
               psql -h postgresqldb -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
                    -f /etc/dbvolume/data.sql
 
-              echo "Loading config"
-              psql -h postgresqldb -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
-                   -f /etc/dbvolume/config.sql
-
               echo "Database initialization completed successfully"
 
           env:
