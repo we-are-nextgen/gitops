@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextgen-api
+  namespace: nextgen-gitops
 spec:
   replicas: 1
   selector:
@@ -10,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app:nextgen-api
+        app: nextgen-api
     spec:
       containers:
         - name: nextgen-api
@@ -21,17 +22,17 @@ spec:
             - name: USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: USERNAME
+                  name: postgresql
+                  key: database-name
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: PASSWORD
+                  name: postgresql
+                  key: database-password
             - name: POSTGRESQL
               valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
+                secretKeyRef:
+                  name: postgresql
                   key: POSTGRESQL
             - name: QUARKUS_PROFILE
               value: prod
