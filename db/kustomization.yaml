@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - db-config.yaml
 - db.yaml
-- db-job.yaml
+# - db-job.yaml

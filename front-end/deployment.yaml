@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextgen-front-end
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextgen-front-end
+  template:
+    metadata:
+      labels:
+        app: nfront-front-end
+    spec:
+      containers:
+        - name: front-end
+          image: myacr.azurecr.io/nextjs-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: front-end-secret
+                  key: NEXTAUTH_SECRET
+
+            - name: NEXTAUTH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: front-end-config
+                  key: NEXTAUTH_URL
+
+            - name: KEYCLOAK_ISSUER
+              valueFrom:
+                configMapKeyRef:
+                  name: front-end-config
+                  key: KEYCLOAK_ISSUER
+
+            - name: KEYCLOAK_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: front-end-config
+                  key: KEYCLOAK_CLIENT_ID
+
+            - name: NEXT_PUBLIC_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: front-end-config
+                  key: NEXT_PUBLIC_API_URL
