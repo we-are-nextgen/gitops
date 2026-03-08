@@ -2,7 +2,7 @@ kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
   name: keycloak
-  namespace: smartgen
+  namespace: nextgen-gitops
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:

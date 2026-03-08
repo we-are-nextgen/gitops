@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
-  namespace: smartgen
+  namespace: nextgen-gitops
   labels:
     app: postgres
 spec:

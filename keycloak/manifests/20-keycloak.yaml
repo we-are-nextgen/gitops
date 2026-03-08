@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: smartgen
+  namespace: nextgen-gitops
   name: keycloak
   labels:
     app: keycloak
@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: smartgen
+  namespace: nextgen-gitops
   labels:
     app: keycloak
   name: keycloak-discovery
@@ -33,7 +33,7 @@ apiVersion: apps/v1
 # This prevents losing in-memory information stored redundantly in two Pods.
 kind: StatefulSet
 metadata:
-  namespace: smartgen
+  namespace: nextgen-gitops
   name: keycloak
   labels:
     app: keycloak
