@@ -46,7 +46,7 @@ metadata:
   labels:
     app: postgres
   name: postgres
-  namespace: smartgen
+  namespace: nextgen-gitops
 spec:
   selector:
     app: postgres
