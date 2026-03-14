@@ -3,6 +3,8 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: keycloak
   namespace: nextgen-gitops
+  annotations:
+    kubernetes.azure.com/tls-cert-keyvault-uri: "https://azure-store-vault.vault.azure.net/certificates/azure-store-cert/4176a4aa7e3f4d33a0d7a5f48b676f84"
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
