@@ -2,8 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: front-end-config
+  namespace: nextgen-gitops
 data:
   NEXTAUTH_URL: "https://front-end.smart-nextgen.com/"
-  KEYCLOAK_ISSUER: "https://keycloak.example.com/realms/myrealm"
+  KEYCLOAK_ISSUER: "https://sso.smart-nextgen.com/realms/master"
   KEYCLOAK_CLIENT_ID: "nextjs-frontend"
   NEXT_PUBLIC_API_URL: "https://nextgen-api.smart-nextgen.com/"
