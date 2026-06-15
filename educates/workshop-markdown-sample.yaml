@@ -1,0 +1,16 @@
+# Sample Educates workshop — deploy after Educates operator is installed.
+# See https://docs.educates.dev/ for full workshop authoring guide.
+apiVersion: training.educates.dev/v1beta1
+kind: Workshop
+metadata:
+  name: lab-markdown-sample
+  namespace: educates
+spec:
+  title: Markdown Sample
+  description: A sample Educates workshop for NextGen integration testing
+  publish:
+    image: ghcr.io/educates/lab-markdown-sample
+  workshop:
+    files:
+      - image:
+          url: ghcr.io/educates/lab-markdown-sample-files

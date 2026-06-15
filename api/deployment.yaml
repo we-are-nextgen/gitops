@@ -36,3 +36,33 @@ spec:
                   key: POSTGRESQL
             - name: QUARKUS_PROFILE
               value: prod
+            - name: EDUCATES_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: educates-credentials
+                  key: EDUCATES_BASE_URL
+            - name: EDUCATES_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: educates-credentials
+                  key: EDUCATES_CLIENT_ID
+            - name: EDUCATES_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: educates-credentials
+                  key: EDUCATES_CLIENT_SECRET
+            - name: EDUCATES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: educates-credentials
+                  key: EDUCATES_USERNAME
+            - name: EDUCATES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: educates-credentials
+                  key: EDUCATES_PASSWORD
+            - name: NEXTGEN_PORTAL_URL
+              valueFrom:
+                secretKeyRef:
+                  name: educates-credentials
+                  key: NEXTGEN_PORTAL_URL

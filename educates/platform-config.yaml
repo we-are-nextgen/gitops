@@ -1,0 +1,18 @@
+# Educates platform config for AKS (generic provider).
+# AKS already has an ingress controller (Azure Web App Routing).
+# Ensure wildcard DNS maps *.workshops.smart-nextgen.com to the cluster ingress.
+#
+# Install:
+#   educates deploy-platform --config gitops/educates/platform-config.yaml
+#
+# Docs: https://docs.educates.dev/en/stable/installation-guides/cli-based-installation.html
+clusterInfrastructure:
+  provider: generic
+
+clusterIngress:
+  domain: workshops.smart-nextgen.com
+
+# Disable Contour — use the cluster's existing ingress controller
+clusterPackages:
+  contour:
+    enabled: false

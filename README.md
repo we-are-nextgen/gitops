@@ -43,7 +43,8 @@ Kubernetes manifests for the **NextGen** platform, managed declaratively with [K
 
 ```
 gitops/
-├── api/                      # API deployment, service, kustomization
+├── api/                      # API deployment, service, Educates secret, kustomization
+├── educates/                 # Educates Training Portal and sample workshops
 ├── db/                       # PostgreSQL deployment, secret, PVC, init job
 ├── front-end/                # Front-end deployment, service, ingress, configmap
 ├── keycloak/                 # Keycloak IAM stack (manifests, realm, scripts)
@@ -103,6 +104,13 @@ kubectl get ingress -n nextgen-gitops
 - Connects to PostgreSQL using credentials from the `postgresql` secret
 - Runs in `prod` profile
 - ClusterIP service on port 8080
+- Integrates with Educates via credentials in `educates-credentials` secret (see `api/educates-secret.yaml`)
+
+### Educates (Workshop Platform)
+
+- Install platform with `educates deploy-platform --config educates/platform-config.yaml` (see [educates/README.md](educates/README.md))
+- Deploy workshops with `kubectl apply -k educates/` or `educates deploy-workshop -f <workshop.yaml>`
+- Robot OAuth credentials from `kubectl describe trainingportal nextgen-portal -n educates` go into `educates-credentials`
 
 ### Database (PostgreSQL 15)
 
@@ -151,3 +159,9 @@ kubectl apply -k . --dry-run=client
 | Front-End | `https://front-end.smart-nextgen.com` |
 | API | `https://nextgen-api.smart-nextgen.com` |
 | Keycloak | `https://sso.smart-nextgen.com` |
+
+
+# Github OAuth app settings
+## Authorization callback URL
+### AKS => http://host.containers.internal:9090/realms/myrealm/broker/github/endpoint
+### local => http://localhost:9090/realms/myrealm/broker/github/endpoint

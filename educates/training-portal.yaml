@@ -1,0 +1,29 @@
+# Educates Training Portal for NextGen workshop sessions.
+# Requires Educates platform installed first:
+#   educates deploy-platform --config platform-config.yaml
+# After apply, retrieve robot REST API credentials:
+#   kubectl describe trainingportal nextgen-portal -n educates
+apiVersion: training.educates.dev/v1beta1
+kind: TrainingPortal
+metadata:
+  name: nextgen-portal
+  namespace: educates
+spec:
+  portal:
+    registration:
+      type: one-step
+      enabled: false
+    index:
+      url: https://front-end.smart-nextgen.com/workshops/return?target=/dashboard/it-professional
+    sessions:
+      maximum: 20
+  workshops:
+    - name: lab-markdown-sample
+      capacity: 5
+      reserved: 1
+    - name: openshift-console-basics
+      capacity: 5
+      reserved: 1
+    - name: podman-basics-lab
+      capacity: 5
+      reserved: 1
