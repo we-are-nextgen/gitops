@@ -1,0 +1,30 @@
+{
+  "clientId": "educates-platform",
+  "name": "Educates Platform",
+  "description": "OIDC client used by the Educates application.",
+  "enabled": true,
+  "protocol": "openid-connect",
+  "publicClient": true,
+  "standardFlowEnabled": true,
+  "implicitFlowEnabled": false,
+  "directAccessGrantsEnabled": false,
+  "serviceAccountsEnabled": false,
+  "authorizationServicesEnabled": false,
+  "frontchannelLogout": true,
+  "rootUrl": "https://educates.smart-nextgen.com",
+  "baseUrl": "/",
+  "redirectUris": [
+    "https://educates.smart-nextgen.com/*",
+    "http://localhost:3000/*",
+    "http://localhost:5173/*"
+  ],
+  "webOrigins": [
+    "https://educates.smart-nextgen.com",
+    "http://localhost:3000",
+    "http://localhost:5173"
+  ],
+  "attributes": {
+    "pkce.code.challenge.method": "S256",
+    "post.logout.redirect.uris": "https://educates.smart-nextgen.com/*##http://localhost:3000/*##http://localhost:5173/*"
+  }
+}
