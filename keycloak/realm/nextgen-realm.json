@@ -40,21 +40,23 @@
       "serviceAccountsEnabled": false,
       "authorizationServicesEnabled": false,
       "frontchannelLogout": true,
-      "rootUrl": "https://educates.smart-nextgen.com",
+      "rootUrl": "https://educates-cli-ui.educates.smart-nextgen.com",
       "baseUrl": "/",
       "redirectUris": [
+        "https://educates-cli-ui.educates.smart-nextgen.com/*",
         "https://educates.smart-nextgen.com/*",
         "http://localhost:3000/*",
         "http://localhost:5173/*"
       ],
       "webOrigins": [
+        "https://educates-cli-ui.educates.smart-nextgen.com",
         "https://educates.smart-nextgen.com",
         "http://localhost:3000",
         "http://localhost:5173"
       ],
       "attributes": {
         "pkce.code.challenge.method": "S256",
-        "post.logout.redirect.uris": "https://educates.smart-nextgen.com/*##http://localhost:3000/*##http://localhost:5173/*"
+        "post.logout.redirect.uris": "https://educates-cli-ui.educates.smart-nextgen.com/*##https://educates.smart-nextgen.com/*##http://localhost:3000/*##http://localhost:5173/*"
       }
     }
   ]
